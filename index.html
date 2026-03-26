@@ -1,0 +1,801 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>🦘 Find My Kangaroo</title>
+<link href="https://fonts.googleapis.com/css2?family=Lilita+One&family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --ochre: #C4751B;
+    --rust: #A0522D;
+    --sand: #F5E6C8;
+    --cream: #FFF8ED;
+    --deep-earth: #3B1F0B;
+    --eucalyptus: #4A7C59;
+    --sky: #6BAFE0;
+    --sunset: #E8734A;
+    --gold: #E8A838;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--cream);
+    color: var(--deep-earth);
+    min-height: 100vh;
+    overflow-x: hidden;
+  }
+
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background:
+      radial-gradient(ellipse at 20% 80%, rgba(196, 117, 27, 0.08) 0%, transparent 50%),
+      radial-gradient(ellipse at 80% 20%, rgba(74, 124, 89, 0.06) 0%, transparent 50%),
+      radial-gradient(ellipse at 50% 50%, rgba(232, 168, 56, 0.04) 0%, transparent 70%);
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  .app {
+    position: relative;
+    z-index: 1;
+    max-width: 720px;
+    margin: 0 auto;
+    padding: 2rem 1.5rem 4rem;
+  }
+
+  /* Header */
+  .header {
+    text-align: center;
+    margin-bottom: 2.5rem;
+    animation: fadeDown 0.8s ease-out;
+  }
+
+  .kangaroo-icon {
+    font-size: 4.5rem;
+    display: block;
+    margin-bottom: 0.5rem;
+    animation: bounce 2s ease-in-out infinite;
+    filter: drop-shadow(0 8px 16px rgba(59, 31, 11, 0.15));
+  }
+
+  h1 {
+    font-family: 'Lilita One', cursive;
+    font-size: clamp(2rem, 6vw, 3.2rem);
+    color: var(--deep-earth);
+    line-height: 1.1;
+    letter-spacing: -0.02em;
+  }
+
+  h1 span { color: var(--ochre); }
+
+  .subtitle {
+    font-size: 1.05rem;
+    color: var(--rust);
+    margin-top: 0.5rem;
+    font-weight: 500;
+    transition: opacity 0.4s ease;
+    min-height: 1.6em;
+  }
+
+  /* Locate button */
+  .locate-section {
+    text-align: center;
+    margin-bottom: 2rem;
+    animation: fadeUp 0.8s ease-out 0.2s both;
+  }
+
+  .locate-btn {
+    font-family: 'Lilita One', cursive;
+    font-size: 1.3rem;
+    letter-spacing: 0.03em;
+    padding: 1rem 2.5rem;
+    border: none;
+    border-radius: 60px;
+    background: linear-gradient(135deg, var(--ochre), var(--sunset));
+    color: white;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 6px 24px rgba(196, 117, 27, 0.35), inset 0 1px 0 rgba(255,255,255,0.2);
+    position: relative;
+    overflow: hidden;
+  }
+
+  .locate-btn::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(135deg, transparent 40%, rgba(255,255,255,0.15));
+    pointer-events: none;
+  }
+
+  .locate-btn:hover {
+    transform: translateY(-3px) scale(1.03);
+    box-shadow: 0 10px 32px rgba(196, 117, 27, 0.45), inset 0 1px 0 rgba(255,255,255,0.2);
+  }
+
+  .locate-btn:active { transform: translateY(0) scale(0.98); }
+
+  .locate-btn:disabled {
+    opacity: 0.7;
+    cursor: not-allowed;
+    transform: none;
+  }
+
+  .locate-btn .spinner {
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    border: 3px solid rgba(255,255,255,0.3);
+    border-top-color: white;
+    border-radius: 50%;
+    animation: spin 0.8s linear infinite;
+    vertical-align: middle;
+    margin-right: 0.5rem;
+  }
+
+  /* Place search */
+  .manual-toggle {
+    display: inline-block;
+    margin-top: 1rem;
+    font-size: 0.9rem;
+    color: var(--ochre);
+    cursor: pointer;
+    font-weight: 600;
+    text-decoration: underline;
+    text-underline-offset: 3px;
+    transition: color 0.2s;
+  }
+
+  .manual-toggle:hover { color: var(--sunset); }
+
+  .manual-input {
+    display: none;
+    margin-top: 1rem;
+    gap: 0.75rem;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+  }
+
+  .manual-input.visible { display: flex; }
+
+  .manual-input input {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 1rem;
+    padding: 0.7rem 1rem;
+    border: 2px solid rgba(196, 117, 27, 0.25);
+    border-radius: 12px;
+    background: white;
+    color: var(--deep-earth);
+    width: 280px;
+    transition: border-color 0.2s;
+  }
+
+  .manual-input input:focus {
+    outline: none;
+    border-color: var(--ochre);
+  }
+
+  .manual-input button {
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 700;
+    font-size: 0.95rem;
+    padding: 0.7rem 1.5rem;
+    border: none;
+    border-radius: 12px;
+    background: var(--eucalyptus);
+    color: white;
+    cursor: pointer;
+    transition: all 0.2s;
+  }
+
+  .manual-input button:hover {
+    background: #3d6a4b;
+    transform: translateY(-1px);
+  }
+
+  /* Result card */
+  .result-card {
+    display: none;
+    background: white;
+    border-radius: 24px;
+    padding: 2rem;
+    box-shadow: 0 4px 32px rgba(59, 31, 11, 0.08), 0 1px 4px rgba(59, 31, 11, 0.04);
+    border: 1px solid rgba(196, 117, 27, 0.1);
+    animation: fadeUp 0.6s ease-out;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .result-card.visible { display: block; }
+
+  .result-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 4px;
+    background: linear-gradient(90deg, var(--ochre), var(--gold), var(--eucalyptus));
+  }
+
+  .result-label {
+    font-size: 0.8rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    color: var(--ochre);
+    margin-bottom: 0.25rem;
+  }
+
+  .result-location {
+    font-family: 'Lilita One', cursive;
+    font-size: clamp(1.5rem, 4vw, 2rem);
+    color: var(--deep-earth);
+    margin-bottom: 0.25rem;
+  }
+
+  .result-location a {
+    color: var(--deep-earth);
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+
+  .result-location a:hover { color: var(--ochre); }
+
+  .result-type {
+    font-size: 0.9rem;
+    color: var(--rust);
+    font-weight: 500;
+    margin-bottom: 1.5rem;
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+    flex-wrap: wrap;
+  }
+
+  .result-type .tag {
+    display: inline-block;
+    background: var(--sand);
+    padding: 0.15rem 0.6rem;
+    border-radius: 20px;
+    font-size: 0.8rem;
+    font-weight: 700;
+    color: var(--ochre);
+  }
+
+  .result-desc {
+    font-size: 0.9rem;
+    color: rgba(59, 31, 11, 0.65);
+    margin-bottom: 1.5rem;
+    line-height: 1.5;
+    font-style: italic;
+  }
+
+  .source-link {
+    display: inline-block;
+    font-size: 0.8rem;
+    font-weight: 600;
+    color: var(--sky);
+    text-decoration: none;
+    margin-bottom: 1.5rem;
+    transition: color 0.2s;
+  }
+
+  .source-link:hover { color: var(--ochre); }
+
+  .distance-display {
+    background: linear-gradient(135deg, #FFF8ED, #FEF0D5);
+    border-radius: 16px;
+    padding: 1.5rem;
+    text-align: center;
+    margin-bottom: 1.5rem;
+    border: 1px solid rgba(232, 168, 56, 0.2);
+  }
+
+  .distance-number {
+    font-family: 'Lilita One', cursive;
+    font-size: clamp(2.5rem, 8vw, 4rem);
+    color: var(--ochre);
+    line-height: 1;
+  }
+
+  .distance-unit {
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: var(--rust);
+    margin-top: 0.25rem;
+  }
+
+  .distance-miles {
+    font-size: 0.85rem;
+    color: rgba(59, 31, 11, 0.5);
+    margin-top: 0.15rem;
+  }
+
+  .fun-fact {
+    background: linear-gradient(135deg, rgba(74, 124, 89, 0.08), rgba(74, 124, 89, 0.03));
+    border-radius: 12px;
+    padding: 1rem 1.25rem;
+    font-size: 0.9rem;
+    color: var(--deep-earth);
+    line-height: 1.6;
+    border-left: 3px solid var(--eucalyptus);
+  }
+
+  .fun-fact strong { color: var(--eucalyptus); }
+
+  /* Direction hint */
+  .direction {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    margin-bottom: 1.5rem;
+    padding: 0.75rem 1rem;
+    background: rgba(107, 175, 224, 0.08);
+    border-radius: 12px;
+  }
+
+  .compass {
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    background: var(--sky);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.5rem;
+    flex-shrink: 0;
+    box-shadow: 0 2px 8px rgba(107, 175, 224, 0.3);
+  }
+
+  .direction-text {
+    font-size: 0.95rem;
+    font-weight: 500;
+    color: var(--deep-earth);
+  }
+
+  .direction-text strong { color: var(--sky); }
+
+  /* Hop counter */
+  .hop-counter {
+    text-align: center;
+    margin-top: 1.25rem;
+    font-size: 0.9rem;
+    color: var(--rust);
+    font-weight: 500;
+  }
+
+  .hop-counter span {
+    font-family: 'Lilita One', cursive;
+    font-size: 1.1rem;
+    color: var(--ochre);
+  }
+
+  /* Footer */
+  .footer {
+    text-align: center;
+    margin-top: 2.5rem;
+    font-size: 0.8rem;
+    color: rgba(59, 31, 11, 0.35);
+    animation: fadeUp 0.8s ease-out 0.4s both;
+    line-height: 1.7;
+  }
+
+  .footer a {
+    color: rgba(59, 31, 11, 0.5);
+    text-decoration: underline;
+    text-underline-offset: 2px;
+    transition: color 0.2s;
+  }
+
+  .footer a:hover { color: var(--ochre); }
+
+  .footer-toggle {
+    cursor: pointer;
+    font-weight: 600;
+    color: rgba(59, 31, 11, 0.45);
+    display: inline-block;
+    margin-top: 0.5rem;
+  }
+
+  .footer-toggle:hover { color: var(--ochre); }
+
+  .collapsible {
+    display: none;
+    margin-top: 0.75rem;
+    text-align: left;
+    max-width: 500px;
+    margin-left: auto;
+    margin-right: auto;
+    background: rgba(196, 117, 27, 0.04);
+    border-radius: 12px;
+    padding: 1rem 1.25rem;
+    line-height: 1.8;
+    color: rgba(59, 31, 11, 0.45);
+  }
+
+  .collapsible.visible { display: block; }
+
+  .collapsible h3 {
+    font-family: 'Lilita One', cursive;
+    font-size: 1rem;
+    color: var(--ochre);
+    margin-bottom: 0.5rem;
+  }
+
+  .collapsible p {
+    margin-bottom: 0.5rem;
+    font-size: 0.8rem;
+    line-height: 1.7;
+  }
+
+  .collapsible code {
+    background: rgba(196, 117, 27, 0.08);
+    padding: 0.1rem 0.4rem;
+    border-radius: 4px;
+    font-size: 0.78rem;
+  }
+
+  /* Error */
+  .error-msg {
+    display: none;
+    text-align: center;
+    padding: 1rem;
+    background: rgba(232, 115, 74, 0.1);
+    border-radius: 12px;
+    color: var(--sunset);
+    font-weight: 600;
+    margin-bottom: 1rem;
+    animation: fadeUp 0.4s ease-out;
+  }
+
+  .error-msg.visible { display: block; }
+
+  /* Animations */
+  @keyframes fadeDown {
+    from { opacity: 0; transform: translateY(-20px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  @keyframes bounce {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-12px); }
+  }
+
+  @keyframes spin {
+    to { transform: rotate(360deg); }
+  }
+
+  @media (max-width: 480px) {
+    .app { padding: 1.5rem 1rem 3rem; }
+    .result-card { padding: 1.5rem; }
+    .distance-display { padding: 1.25rem; }
+  }
+</style>
+</head>
+<body>
+<div class="app">
+  <header class="header">
+    <span class="kangaroo-icon">🦘</span>
+    <h1><span>Find My</span> Kangaroo</h1>
+    <p class="subtitle" id="subtitle">How far are you from a kangaroo right now?</p>
+  </header>
+
+  <section class="locate-section">
+    <button class="locate-btn" id="locateBtn" onclick="findMyKangaroo()">
+      📍 Find My Kangaroo
+    </button>
+    <div>
+      <span class="manual-toggle" onclick="toggleManual()">Or type a city, address, or place</span>
+    </div>
+    <div class="manual-input" id="manualInput">
+      <input type="text" id="placeInput" placeholder="e.g. Tokyo, Paris, 10 Downing St" onkeydown="if(event.key==='Enter')searchPlace()">
+      <button onclick="searchPlace()">Search</button>
+    </div>
+  </section>
+
+  <div class="error-msg" id="errorMsg"></div>
+
+  <div class="result-card" id="resultCard">
+    <div class="result-label">YOUR NEAREST KANGAROO IS AT</div>
+    <div class="result-location" id="resultName"></div>
+    <div class="result-desc" id="resultDesc"></div>
+    <div class="result-type" id="resultType"></div>
+    <a class="source-link" id="sourceLink" href="#" target="_blank">🔗 View source / website →</a>
+
+    <div class="direction" id="directionBox">
+      <div class="compass" id="compassEmoji"></div>
+      <div class="direction-text" id="directionText"></div>
+    </div>
+
+    <div class="distance-display">
+      <div class="distance-number" id="distanceKm"></div>
+      <div class="distance-unit">kilometres away</div>
+      <div class="distance-miles" id="distanceMiles"></div>
+    </div>
+
+    <div class="hop-counter">
+      That's roughly <span id="hopCount"></span> kangaroo hops! 🦘
+    </div>
+
+    <div class="fun-fact" id="funFact"></div>
+  </div>
+
+  <footer class="footer">
+    No kangaroos were disturbed in the making of this app.<br>
+    Kangaroo locations based on known wildlife habitats, zoos &amp; sanctuaries worldwide. Geocoding by OpenStreetMap.
+
+    <div>
+      <span class="footer-toggle" onclick="toggle('credits')">▾ How this happened</span>
+      &nbsp;&middot;&nbsp;
+      <span class="footer-toggle" onclick="toggle('contribute')">▾ Help improve the data</span>
+    </div>
+
+    <div class="collapsible" id="credits">
+      Built by <a href="https://www.anthropic.com" target="_blank">Claude</a> (AI by Anthropic).
+      Inspired by <a href="https://www.youtube.com/@garrettsadventure" target="_blank">@garrettsadventure</a>, who was in the middle of Sydney Harbour and just wanted to see a kangaroo.
+      Further inspired by the <a href="https://www.facebook.com/australiainthailand/posts/-%E0%B8%82%E0%B9%88%E0%B8%B2%E0%B8%A7%E0%B8%94%E0%B9%88%E0%B8%A7%E0%B8%99-%E0%B8%AA%E0%B8%96%E0%B8%B2%E0%B8%99%E0%B8%97%E0%B8%B9%E0%B8%95%E0%B8%AD%E0%B8%AD%E0%B8%AA%E0%B9%80%E0%B8%95%E0%B8%A3%E0%B9%80%E0%B8%A5%E0%B8%B5%E0%B8%A2%E0%B9%80%E0%B8%95%E0%B8%A3%E0%B8%B5%E0%B8%A2%E0%B8%A1%E0%B8%95%E0%B9%89%E0%B8%AD%E0%B8%99%E0%B8%A3%E0%B8%B1%E0%B8%9A-%E0%B8%99%E0%B8%B1%E0%B8%81%E0%B8%81%E0%B8%B2%E0%B8%A3%E0%B8%97%E0%B8%B9%E0%B8%95-%E0%B8%84%E0%B8%99%E0%B9%83%E0%B8%AB%E0%B8%A1%E0%B9%88-%E0%B8%99%E0%B8%B1%E0%B8%81%E0%B8%81%E0%B8%B2%E0%B8%A3%E0%B8%97%E0%B8%B9%E0%B8%95%E0%B8%84%E0%B8%99%E0%B9%83%E0%B8%AB%E0%B8%A1%E0%B9%88%E0%B9%80%E0%B8%9E%E0%B8%B4%E0%B9%88%E0%B8%87%E0%B9%80%E0%B8%94/1117589220394788/" target="_blank">Australian Embassy in Bangkok</a> and their excellent soft power game.
+      Domain by <a href="https://nofrillscloud.com/" target="_blank">NoFrillsCloud</a>. Hosted on <a href="https://github.com" target="_blank">GitHub</a>.
+    </div>
+
+    <div class="collapsible" id="contribute">
+      <h3>🦘 Know a kangaroo we're missing?</h3>
+      <p>Our location data and fun facts are stored as simple JSON files that anyone can edit. You can help by submitting a pull request on GitHub:</p>
+      <p>
+        <a href="https://github.com/ThreeForTen/findmykangaroo/blob/main/data/locations.json" target="_blank">📍 Edit locations.json</a> — add a zoo, sanctuary, or wild habitat<br>
+        <a href="https://github.com/ThreeForTen/findmykangaroo/blob/main/data/facts.json" target="_blank">🧠 Edit facts.json</a> — add a fun kangaroo fact
+      </p>
+      <p>Each location needs: <code>name</code>, <code>lat</code>, <code>lng</code>, <code>type</code> (wild/zoo), <code>country</code>, <code>desc</code>, and <code>url</code> (a link proving kangaroos are there). See the <a href="https://github.com/ThreeForTen/findmykangaroo#readme" target="_blank">README</a> for full details.</p>
+    </div>
+
+    <div style="margin-top: 1rem;">
+      <a href="privacy.html" style="color: rgba(59,31,11,0.4); margin: 0 0.5rem;">Privacy</a>
+      <a href="terms.html" style="color: rgba(59,31,11,0.4); margin: 0 0.5rem;">Terms</a>
+      <a href="disclaimer.html" style="color: rgba(59,31,11,0.4); margin: 0 0.5rem;">Disclaimer</a>
+    </div>
+  </footer>
+</div>
+
+<script>
+// Data loaded from external JSON files
+let KANGAROO_LOCATIONS = [];
+let FUN_FACTS = [];
+
+async function loadData() {
+  try {
+    const [locRes, factRes] = await Promise.all([
+      fetch('data/locations.json'),
+      fetch('data/facts.json')
+    ]);
+    KANGAROO_LOCATIONS = await locRes.json();
+    FUN_FACTS = await factRes.json();
+  } catch (e) {
+    console.error('Failed to load data files:', e);
+    showError('Failed to load kangaroo data. Please refresh the page.');
+  }
+}
+
+// Load data on page load
+loadData();
+
+function haversineDistance(lat1, lon1, lat2, lon2) {
+  const R = 6371;
+  const dLat = (lat2 - lat1) * Math.PI / 180;
+  const dLon = (lon2 - lon1) * Math.PI / 180;
+  const a =
+    Math.sin(dLat / 2) ** 2 +
+    Math.cos(lat1 * Math.PI / 180) * Math.cos(lat2 * Math.PI / 180) *
+    Math.sin(dLon / 2) ** 2;
+  return R * 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+}
+
+function getBearing(lat1, lon1, lat2, lon2) {
+  const dLon = (lon2 - lon1) * Math.PI / 180;
+  const y = Math.sin(dLon) * Math.cos(lat2 * Math.PI / 180);
+  const x = Math.cos(lat1 * Math.PI / 180) * Math.sin(lat2 * Math.PI / 180) -
+            Math.sin(lat1 * Math.PI / 180) * Math.cos(lat2 * Math.PI / 180) * Math.cos(dLon);
+  let bearing = Math.atan2(y, x) * 180 / Math.PI;
+  return (bearing + 360) % 360;
+}
+
+function bearingToDirection(b) {
+  const dirs = [
+    [337.5, 360, "North", "⬆️"], [0, 22.5, "North", "⬆️"],
+    [22.5, 67.5, "Northeast", "↗️"], [67.5, 112.5, "East", "➡️"],
+    [112.5, 157.5, "Southeast", "↘️"], [157.5, 202.5, "South", "⬇️"],
+    [202.5, 247.5, "Southwest", "↙️"], [247.5, 292.5, "West", "⬅️"],
+    [292.5, 337.5, "Northwest", "↖️"],
+  ];
+  for (const [min, max, name, emoji] of dirs) {
+    if (b >= min && b < max) return { name, emoji };
+  }
+  return { name: "North", emoji: "⬆️" };
+}
+
+function showResult(userLat, userLng) {
+  if (KANGAROO_LOCATIONS.length === 0) {
+    showError('Kangaroo data is still loading. Please try again in a moment.');
+    return;
+  }
+
+  let nearest = null;
+  let minDist = Infinity;
+
+  for (const loc of KANGAROO_LOCATIONS) {
+    const d = haversineDistance(userLat, userLng, loc.lat, loc.lng);
+    if (d < minDist) {
+      minDist = d;
+      nearest = loc;
+    }
+  }
+
+  const bearing = getBearing(userLat, userLng, nearest.lat, nearest.lng);
+  const dir = bearingToDirection(bearing);
+  const miles = minDist * 0.621371;
+  const hops = Math.round(minDist * 1000 / 8);
+
+  // Location name — link to source if available
+  const nameEl = document.getElementById('resultName');
+  if (nearest.url) {
+    nameEl.innerHTML = `<a href="${nearest.url}" target="_blank">${nearest.name}</a>`;
+  } else {
+    nameEl.textContent = nearest.name;
+  }
+
+  // Description
+  document.getElementById('resultDesc').textContent = nearest.desc || '';
+
+  // Type tag + country
+  const typeTag = nearest.type === 'wild' ? '🌿 Wild Population' : '🏛️ Zoo / Sanctuary';
+  document.getElementById('resultType').innerHTML =
+    `<span class="tag">${typeTag}</span>&nbsp; ${nearest.country}`;
+
+  // Source link
+  const sourceEl = document.getElementById('sourceLink');
+  if (nearest.url) {
+    sourceEl.href = nearest.url;
+    sourceEl.style.display = 'inline-block';
+  } else {
+    sourceEl.style.display = 'none';
+  }
+
+  document.getElementById('compassEmoji').textContent = dir.emoji;
+  document.getElementById('directionText').innerHTML =
+    `Head <strong>${dir.name}</strong> to reach your nearest kangaroo`;
+
+  document.getElementById('distanceKm').textContent = minDist < 10
+    ? minDist.toFixed(1)
+    : Math.round(minDist).toLocaleString();
+  document.getElementById('distanceMiles').textContent =
+    `(${miles < 10 ? miles.toFixed(1) : Math.round(miles).toLocaleString()} miles)`;
+
+  document.getElementById('hopCount').textContent = hops.toLocaleString();
+
+  if (FUN_FACTS.length > 0) {
+    const fact = FUN_FACTS[Math.floor(Math.random() * FUN_FACTS.length)];
+    document.getElementById('funFact').innerHTML =
+      `<strong>🦘 Fun Fact:</strong> ${fact}`;
+  }
+
+  const card = document.getElementById('resultCard');
+  card.classList.add('visible');
+  card.style.animation = 'none';
+  card.offsetHeight;
+  card.style.animation = 'fadeUp 0.6s ease-out';
+  card.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+
+  const btn = document.getElementById('locateBtn');
+  btn.disabled = false;
+  btn.innerHTML = '📍 Find My Kangaroo';
+}
+
+function showError(msg) {
+  const el = document.getElementById('errorMsg');
+  el.textContent = msg;
+  el.classList.add('visible');
+  const btn = document.getElementById('locateBtn');
+  btn.disabled = false;
+  btn.innerHTML = '📍 Find My Kangaroo';
+}
+
+function findMyKangaroo() {
+  const btn = document.getElementById('locateBtn');
+  btn.disabled = true;
+  btn.innerHTML = '<span class="spinner"></span>Searching…';
+  document.getElementById('errorMsg').classList.remove('visible');
+  document.getElementById('resultCard').classList.remove('visible');
+
+  if (!navigator.geolocation) {
+    showError("Geolocation isn't supported by your browser. Try searching for a place instead.");
+    return;
+  }
+
+  navigator.geolocation.getCurrentPosition(
+    pos => showResult(pos.coords.latitude, pos.coords.longitude),
+    err => {
+      const msgs = {
+        1: "Location access denied. Try searching for a city or address instead!",
+        2: "Couldn't determine your location. Try again or search for a place.",
+        3: "Location request timed out. Try again or search for a place.",
+      };
+      showError(msgs[err.code] || "Unknown error getting location.");
+    },
+    { timeout: 10000, enableHighAccuracy: false }
+  );
+}
+
+function toggleManual() {
+  document.getElementById('manualInput').classList.toggle('visible');
+  const input = document.getElementById('placeInput');
+  if (document.getElementById('manualInput').classList.contains('visible')) {
+    setTimeout(() => input.focus(), 100);
+  }
+}
+
+async function searchPlace() {
+  const query = document.getElementById('placeInput').value.trim();
+  if (!query) {
+    showError("Please enter a city, address, or place name.");
+    return;
+  }
+
+  document.getElementById('errorMsg').classList.remove('visible');
+  document.getElementById('resultCard').classList.remove('visible');
+
+  const btn = document.getElementById('locateBtn');
+  btn.disabled = true;
+  btn.innerHTML = '<span class="spinner"></span>Looking up place…';
+
+  try {
+    const url = `https://nominatim.openstreetmap.org/search?format=json&limit=1&q=${encodeURIComponent(query)}`;
+    const resp = await fetch(url, {
+      headers: { 'Accept': 'application/json' }
+    });
+    const data = await resp.json();
+
+    if (!data || data.length === 0) {
+      showError(`Couldn't find "${query}". Try a different city or place name.`);
+      return;
+    }
+
+    const lat = parseFloat(data[0].lat);
+    const lng = parseFloat(data[0].lon);
+    showResult(lat, lng);
+  } catch (e) {
+    showError("Something went wrong looking up that place. Please try again.");
+  }
+}
+
+function toggle(id) {
+  document.getElementById(id).classList.toggle('visible');
+}
+
+// Cycling subtitles
+const SUBTITLES = [
+  "How far are you from a kangaroo right now?",
+  "You're closer to a kangaroo than you think.",
+  "The world's most important distance calculator.",
+  "The question you didn't know you needed answered.",
+];
+let subtitleIndex = 0;
+setInterval(() => {
+  const el = document.getElementById('subtitle');
+  el.style.opacity = '0';
+  setTimeout(() => {
+    subtitleIndex = (subtitleIndex + 1) % SUBTITLES.length;
+    el.textContent = SUBTITLES[subtitleIndex];
+    el.style.opacity = '1';
+  }, 400);
+}, 4000);
+</script>
+</body>
+</html>

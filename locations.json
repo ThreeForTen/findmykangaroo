@@ -1,0 +1,452 @@
+[
+  {
+    "name": "Kangaroo Island",
+    "lat": -35.8,
+    "lng": 137.2,
+    "type": "wild",
+    "country": "Australia",
+    "desc": "Home to tens of thousands of wild kangaroos on a pristine island.",
+    "url": "https://www.tourkangarooisland.com.au/wildlife/kangaroos"
+  },
+  {
+    "name": "Grampians National Park",
+    "lat": -37.2,
+    "lng": 142.4,
+    "type": "wild",
+    "country": "Australia",
+    "desc": "Grey kangaroos roam freely through this stunning mountain landscape.",
+    "url": "https://www.parks.vic.gov.au/places-to-see/parks/grampians-national-park"
+  },
+  {
+    "name": "Namadgi National Park",
+    "lat": -35.6,
+    "lng": 148.9,
+    "type": "wild",
+    "country": "Australia",
+    "desc": "Eastern grey kangaroos are abundant near Canberra.",
+    "url": "https://www.parks.act.gov.au/find-a-park/namadgi-national-park"
+  },
+  {
+    "name": "Pebbly Beach, NSW",
+    "lat": -35.6,
+    "lng": 150.3,
+    "type": "wild",
+    "country": "Australia",
+    "desc": "Famous for kangaroos lounging on the beach at sunrise.",
+    "url": "https://www.nationalparks.nsw.gov.au/things-to-do/beaches/pebbly-beach"
+  },
+  {
+    "name": "Cape Hillsborough",
+    "lat": -20.9,
+    "lng": 149.0,
+    "type": "wild",
+    "country": "Australia",
+    "desc": "Wallabies and kangaroos visit the beach at dawn.",
+    "url": "https://www.capehillsboroughnatureresort.com.au/"
+  },
+  {
+    "name": "Lucky Bay, WA",
+    "lat": -34.0,
+    "lng": 122.2,
+    "type": "wild",
+    "country": "Australia",
+    "desc": "Kangaroos sunbathe on Australia's whitest sand beach.",
+    "url": "https://parks.dpaw.wa.gov.au/park/cape-le-grand"
+  },
+  {
+    "name": "Murramarang National Park",
+    "lat": -35.6,
+    "lng": 150.2,
+    "type": "wild",
+    "country": "Australia",
+    "desc": "Kangaroos graze on coastal campsite lawns.",
+    "url": "https://www.nationalparks.nsw.gov.au/visit-a-park/parks/murramarang-national-park"
+  },
+  {
+    "name": "Blue Mountains",
+    "lat": -33.7,
+    "lng": 150.3,
+    "type": "wild",
+    "country": "Australia",
+    "desc": "Wallaroos and grey kangaroos in eucalyptus forests near Sydney.",
+    "url": "https://www.nationalparks.nsw.gov.au/visit-a-park/parks/blue-mountains-national-park"
+  },
+  {
+    "name": "Flinders Ranges",
+    "lat": -31.4,
+    "lng": 138.6,
+    "type": "wild",
+    "country": "Australia",
+    "desc": "Yellow-footed rock wallabies and red kangaroos in rugged outback.",
+    "url": "https://www.parks.sa.gov.au/find-a-park/Browse_by_region/flinders-ranges-and-outback"
+  },
+  {
+    "name": "Kakadu National Park",
+    "lat": -13.0,
+    "lng": 132.4,
+    "type": "wild",
+    "country": "Australia",
+    "desc": "Agile wallabies in Australia's largest national park.",
+    "url": "https://parksaustralia.gov.au/kakadu/"
+  },
+  {
+    "name": "Great Otway National Park",
+    "lat": -38.75,
+    "lng": 143.5,
+    "type": "wild",
+    "country": "Australia",
+    "desc": "Grey kangaroos in lush coastal rainforest.",
+    "url": "https://www.parks.vic.gov.au/places-to-see/parks/great-otway-national-park"
+  },
+  {
+    "name": "Wilsons Promontory",
+    "lat": -39.0,
+    "lng": 146.3,
+    "type": "wild",
+    "country": "Australia",
+    "desc": "Wombats and kangaroos in Victoria's southernmost national park.",
+    "url": "https://www.parks.vic.gov.au/places-to-see/parks/wilsons-promontory-national-park"
+  },
+  {
+    "name": "Litchfield National Park",
+    "lat": -13.3,
+    "lng": 130.8,
+    "type": "wild",
+    "country": "Australia",
+    "desc": "Agile wallabies near stunning waterfalls.",
+    "url": "https://nt.gov.au/parks/find-a-park/litchfield-national-park"
+  },
+  {
+    "name": "Uluru-Kata Tjuta",
+    "lat": -25.3,
+    "lng": 131.0,
+    "type": "wild",
+    "country": "Australia",
+    "desc": "Red kangaroos roam the red desert around Uluru.",
+    "url": "https://parksaustralia.gov.au/uluru/"
+  },
+  {
+    "name": "Daintree Rainforest",
+    "lat": -16.3,
+    "lng": 145.4,
+    "type": "wild",
+    "country": "Australia",
+    "desc": "Tree-kangaroos live in this ancient tropical rainforest.",
+    "url": "https://www.daintree-rec.com.au/"
+  },
+  {
+    "name": "Outback Queensland",
+    "lat": -23.5,
+    "lng": 144.3,
+    "type": "wild",
+    "country": "Australia",
+    "desc": "Vast red plains home to large mobs of red kangaroos.",
+    "url": "https://www.queensland.com/au/en/places-to-see/experiences/outback-queensland"
+  },
+  {
+    "name": "Chiang Mai Zoo",
+    "lat": 18.81,
+    "lng": 98.95,
+    "type": "zoo",
+    "country": "Thailand",
+    "desc": "Home to red kangaroos in northern Thailand.",
+    "url": "https://www.chiangmaizoo.com/"
+  },
+  {
+    "name": "Safari World Bangkok",
+    "lat": 13.87,
+    "lng": 100.67,
+    "type": "zoo",
+    "country": "Thailand",
+    "desc": "Kangaroos in a walk-through enclosure.",
+    "url": "https://www.safariworld.com/"
+  },
+  {
+    "name": "Khao Kheow Open Zoo",
+    "lat": 13.22,
+    "lng": 101.06,
+    "type": "zoo",
+    "country": "Thailand",
+    "desc": "Kangaroos in a large open-air exhibit near Pattaya.",
+    "url": "https://www.khaokheow.zoothailand.org/"
+  },
+  {
+    "name": "Singapore Zoo",
+    "lat": 1.40,
+    "lng": 103.79,
+    "type": "zoo",
+    "country": "Singapore",
+    "desc": "Grey kangaroos in the Australasia zone.",
+    "url": "https://www.mandai.com/en/singapore-zoo.html"
+  },
+  {
+    "name": "Tama Zoological Park",
+    "lat": 35.65,
+    "lng": 139.38,
+    "type": "zoo",
+    "country": "Japan",
+    "desc": "Walk-through kangaroo exhibit in Tokyo.",
+    "url": "https://www.tokyo-zoo.net/english/tama/"
+  },
+  {
+    "name": "Ueno Zoo",
+    "lat": 35.72,
+    "lng": 139.77,
+    "type": "zoo",
+    "country": "Japan",
+    "desc": "Tokyo's oldest zoo has kangaroos and wallabies.",
+    "url": "https://www.tokyo-zoo.net/english/ueno/"
+  },
+  {
+    "name": "Chimelong Safari Park",
+    "lat": 23.0,
+    "lng": 113.3,
+    "type": "zoo",
+    "country": "China",
+    "desc": "Kangaroos in Asia's largest safari park.",
+    "url": "https://www.chimelong.com/gz-safari-park/"
+  },
+  {
+    "name": "Taipei Zoo",
+    "lat": 24.0,
+    "lng": 121.58,
+    "type": "zoo",
+    "country": "Taiwan",
+    "desc": "Red kangaroos in the Australian animal zone.",
+    "url": "https://english.zoo.gov.taipei/"
+  },
+  {
+    "name": "Seoul Grand Park Zoo",
+    "lat": 37.43,
+    "lng": 127.02,
+    "type": "zoo",
+    "country": "South Korea",
+    "desc": "Grey kangaroos in the Australian section.",
+    "url": "https://grandpark.seoul.go.kr/"
+  },
+  {
+    "name": "Bali Safari & Marine Park",
+    "lat": -8.59,
+    "lng": 115.46,
+    "type": "zoo",
+    "country": "Indonesia",
+    "desc": "Kangaroos in a walk-through exhibit.",
+    "url": "https://www.balisafarimarinepark.com/"
+  },
+  {
+    "name": "London Zoo",
+    "lat": 51.535,
+    "lng": -0.155,
+    "type": "zoo",
+    "country": "UK",
+    "desc": "Red-necked wallabies in Regent's Park.",
+    "url": "https://www.londonzoo.org/"
+  },
+  {
+    "name": "Chester Zoo",
+    "lat": 53.23,
+    "lng": -2.89,
+    "type": "zoo",
+    "country": "UK",
+    "desc": "One of Europe's best zoos, with kangaroos.",
+    "url": "https://www.chesterzoo.org/"
+  },
+  {
+    "name": "Dublin Zoo",
+    "lat": 53.36,
+    "lng": -6.30,
+    "type": "zoo",
+    "country": "Ireland",
+    "desc": "Red kangaroos in the Australian walkabout.",
+    "url": "https://www.dublinzoo.ie/"
+  },
+  {
+    "name": "Berlin Zoological Garden",
+    "lat": 52.51,
+    "lng": 13.34,
+    "type": "zoo",
+    "country": "Germany",
+    "desc": "Grey kangaroos in Germany's oldest zoo.",
+    "url": "https://www.zoo-berlin.de/en"
+  },
+  {
+    "name": "Schönbrunn Zoo, Vienna",
+    "lat": 48.18,
+    "lng": 16.30,
+    "type": "zoo",
+    "country": "Austria",
+    "desc": "Kangaroos at the world's oldest zoo.",
+    "url": "https://www.zoovienna.at/en/"
+  },
+  {
+    "name": "Bioparc Valencia",
+    "lat": 39.48,
+    "lng": -0.41,
+    "type": "zoo",
+    "country": "Spain",
+    "desc": "Immersive kangaroo habitat in Valencia.",
+    "url": "https://www.bioparcvalencia.es/en/"
+  },
+  {
+    "name": "ZooParc de Beauval",
+    "lat": 47.25,
+    "lng": 1.35,
+    "type": "zoo",
+    "country": "France",
+    "desc": "One of France's top zoos, home to kangaroos.",
+    "url": "https://www.zoobeauval.com/en"
+  },
+  {
+    "name": "Apenheul, Netherlands",
+    "lat": 52.21,
+    "lng": 5.92,
+    "type": "zoo",
+    "country": "Netherlands",
+    "desc": "Walk-through kangaroo area in a forest park.",
+    "url": "https://www.apenheul.com/english"
+  },
+  {
+    "name": "San Diego Zoo",
+    "lat": 32.735,
+    "lng": -117.149,
+    "type": "zoo",
+    "country": "USA",
+    "desc": "Red kangaroos in one of the world's most famous zoos.",
+    "url": "https://zoo.sandiegozoo.org/"
+  },
+  {
+    "name": "Bronx Zoo",
+    "lat": 40.85,
+    "lng": -73.88,
+    "type": "zoo",
+    "country": "USA",
+    "desc": "Kangaroos in New York's premier wildlife center.",
+    "url": "https://bronxzoo.com/"
+  },
+  {
+    "name": "Brookfield Zoo, Chicago",
+    "lat": 41.83,
+    "lng": -87.84,
+    "type": "zoo",
+    "country": "USA",
+    "desc": "Grey kangaroos in the Australia House.",
+    "url": "https://www.czs.org/brookfieldzoo"
+  },
+  {
+    "name": "Nashville Zoo",
+    "lat": 36.07,
+    "lng": -86.77,
+    "type": "zoo",
+    "country": "USA",
+    "desc": "Kangaroo Kickabout walk-through experience.",
+    "url": "https://www.nashvillezoo.org/"
+  },
+  {
+    "name": "Dallas Zoo",
+    "lat": 32.74,
+    "lng": -96.82,
+    "type": "zoo",
+    "country": "USA",
+    "desc": "Red kangaroos in the Wilds of Africa section.",
+    "url": "https://www.dallaszoo.com/"
+  },
+  {
+    "name": "Busch Gardens Tampa",
+    "lat": 28.04,
+    "lng": -82.42,
+    "type": "zoo",
+    "country": "USA",
+    "desc": "Kangaroos in the Walkabout Way exhibit.",
+    "url": "https://buschgardens.com/tampa/"
+  },
+  {
+    "name": "Toronto Zoo",
+    "lat": 43.82,
+    "lng": -79.18,
+    "type": "zoo",
+    "country": "Canada",
+    "desc": "Kangaroos in the Australasia Pavilion.",
+    "url": "https://www.torontozoo.com/"
+  },
+  {
+    "name": "Zoológico de Chapultepec",
+    "lat": 19.42,
+    "lng": -99.19,
+    "type": "zoo",
+    "country": "Mexico",
+    "desc": "One of the most-visited zoos in the world.",
+    "url": "https://www.chapultepec.cdmx.gob.mx/zoologico"
+  },
+  {
+    "name": "Al Ain Zoo",
+    "lat": 24.24,
+    "lng": 55.73,
+    "type": "zoo",
+    "country": "UAE",
+    "desc": "Kangaroos in the Arabian desert.",
+    "url": "https://www.alainzoo.ae/"
+  },
+  {
+    "name": "Johannesburg Zoo",
+    "lat": -26.17,
+    "lng": 28.03,
+    "type": "zoo",
+    "country": "South Africa",
+    "desc": "Kangaroos in the Southern Hemisphere's major zoo.",
+    "url": "https://www.jhbzoo.org.za/"
+  },
+  {
+    "name": "Jerusalem Biblical Zoo",
+    "lat": 31.75,
+    "lng": 35.18,
+    "type": "zoo",
+    "country": "Israel",
+    "desc": "Red kangaroos in an award-winning Israeli zoo.",
+    "url": "https://www.jerusalemzoo.org.il/en/"
+  },
+  {
+    "name": "Auckland Zoo",
+    "lat": -36.86,
+    "lng": 174.72,
+    "type": "zoo",
+    "country": "New Zealand",
+    "desc": "Red kangaroos across the Tasman.",
+    "url": "https://www.aucklandzoo.co.nz/"
+  },
+  {
+    "name": "Taronga Zoo, Sydney",
+    "lat": -33.84,
+    "lng": 151.24,
+    "type": "zoo",
+    "country": "Australia",
+    "desc": "Iconic zoo with harbour views and kangaroo encounters.",
+    "url": "https://taronga.org.au/sydney-zoo"
+  },
+  {
+    "name": "Australia Zoo, QLD",
+    "lat": -26.83,
+    "lng": 152.96,
+    "type": "zoo",
+    "country": "Australia",
+    "desc": "Steve Irwin's famous wildlife park with roo feeding.",
+    "url": "https://www.australiazoo.com.au/"
+  },
+  {
+    "name": "Healesville Sanctuary",
+    "lat": -37.69,
+    "lng": 145.52,
+    "type": "zoo",
+    "country": "Australia",
+    "desc": "Dedicated Australian wildlife sanctuary.",
+    "url": "https://www.zoo.org.au/healesville"
+  },
+  {
+    "name": "Lone Pine Koala Sanctuary",
+    "lat": -27.53,
+    "lng": 152.97,
+    "type": "zoo",
+    "country": "Australia",
+    "desc": "World's first and largest koala sanctuary, with kangaroos too.",
+    "url": "https://lonepinekoalasanctuary.com/"
+  }
+]
