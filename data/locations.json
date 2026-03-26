@@ -1,5 +1,29 @@
 [
   {
+    "name": "Adelaide Zoo",
+    "lat": -34.9146911,
+    "lng": 138.6064263,
+    "type": "zoo",
+    "desc": "Join the feeding experience to get up close and personal with kangaroos at Adelaide Zoo",
+    "url": "https://www.adelaidezoo.com.au/animal-experiences/kangaroo-and-wallaby-encounter/"
+  },
+  {
+    "name": "Cleland Wildlife Park",
+    "lat": -34.96723843077112,
+    "lng":  138.69629182763774,
+    "type": "zoo",
+    "desc": "There are very few animal enclosures at Cleland. Most animals live in natural habitat and you can get up close for great photos.",
+    "url": "https://www.clelandwildlifepark.sa.gov.au/plan-your-visit/discover-cleland/what-animals-will-i-see"
+  },
+  {
+    "name": "Gorge Wildlife Park",
+    "lat": -34.841405567514144,
+    "lng": 138.81434191315768,
+    "type": "zoo",
+    "desc": "Walk amongst and feed the Kangaroos and Wallabies including the white (albino) varieties.",
+    "url": "https://gorgewildlifepark.com.au/our-wildlife/"
+  },
+  {
     "name": "Kangaroo Island",
     "lat": -35.8,
     "lng": 137.2,
