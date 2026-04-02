@@ -472,5 +472,14 @@
     "country": "Australia",
     "desc": "World's first and largest koala sanctuary, with kangaroos too.",
     "url": "https://lonepinekoalasanctuary.com/"
-  }
+  },
+  {
+  "name": "The Outback Kangaroo Farm",
+  "lat": 48.225,
+  "lng": -122.094,
+  "type": "zoo",
+  "country": "USA",
+  "desc": "Wildlife Park in Arlington, WA",
+  "url": "https://www.theoutbackkangroofarm.com/"
+}
 ]
